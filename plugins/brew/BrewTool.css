@@ -1,0 +1,28 @@
+@import "part:@sanity/base/theme/variables-style";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  position: absolute;
+  color: var(--brand-primary);
+  background-color: rgb(43, 40, 29);
+  padding: 1rem;
+  box-sizing: border-box;
+  font-weight: 100;
+
+  @nest & h1 {
+    font-weight: 100;
+  }
+}
+
+.dials {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.dial {
+  display: block;
+  width: 300px;
+  height: 300px;
+}

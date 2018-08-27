@@ -1,0 +1,36 @@
+{
+  "name": "heidrun",
+  "private": true,
+  "version": "1.0.0",
+  "description": "",
+  "main": "package.json",
+  "author": "kristoffer sivertsen <kristoffer@bengler.no>",
+  "license": "UNLICENSED",
+  "scripts": {
+    "start": "sanity start",
+    "test": "sanity check"
+  },
+  "keywords": [
+    "sanity"
+  ],
+  "dependencies": {
+    "@sanity/base": "^0.132.8",
+    "@sanity/components": "^0.132.8",
+    "@sanity/core": "^0.132.8",
+    "@sanity/default-layout": "^0.132.9",
+    "@sanity/default-login": "^0.132.8",
+    "@sanity/desk-tool": "^0.132.9",
+    "brauhaus": "^1.1.1",
+    "generic-bitmask": "^0.0.7",
+    "json-query": "^2.2.2",
+    "ndjson": "^1.5.0",
+    "react": "^16.2",
+    "react-dom": "^16.2",
+    "replace-in-file": "^3.2.0",
+    "sanity-plugin-vision": "^2.0.7",
+    "tinycolor": "0.0.1",
+    "tinycolor2": "^1.4.1",
+    "victory": "^30.2.0"
+  },
+  "devDependencies": {}
+}

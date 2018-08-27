@@ -1,0 +1,30 @@
+{
+  "root": true,
+  "project": {
+    "name": "Heidrun"
+  },
+  "api": {
+    "projectId": "k7qicdza",
+    "dataset": "production"
+  },
+  "plugins": [
+    "@sanity/base",
+    "@sanity/components",
+    "@sanity/default-layout",
+    "@sanity/default-login",
+    "@sanity/desk-tool",
+    "brew",
+    "import",
+    "vision"
+  ],
+  "parts": [
+    {
+      "name": "part:@sanity/base/schema",
+      "path": "./schemas/schema.js"
+    },
+    {
+      "implements": "part:@sanity/base/theme/variables/override-style",
+      "path": "./variableOverrides.css"
+    }
+  ]
+}

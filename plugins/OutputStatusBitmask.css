@@ -1,0 +1,19 @@
+.valves {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 1rem;
+}
+
+.valve {
+  display: block;
+}
+
+.closedValve {
+  composes: valve;
+  color: red;
+}
+
+.openValve {
+  composes: valve;
+  color: green;
+}
