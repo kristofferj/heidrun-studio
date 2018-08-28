@@ -1,0 +1,27 @@
+.root {
+  user-select: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 3rem);
+}
+
+.tooltip {
+  background-color: color(#000 a(60%));
+  padding: 1rem;
+}
+
+.tooltipLine {
+  display: flex;
+  justify-content: space-between;
+
+  @nest & > div:first-child {
+    margin-right: 1em;
+  }
+}
+
+.tooltip .legend {
+  text-align: center;
+  font-weight: 600;
+}

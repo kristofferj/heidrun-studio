@@ -1,7 +1,7 @@
 import React, {Fragment} from 'react'
 import tinyColor from 'tinycolor2'
 import PropTypes from 'prop-types'
-
+import dateFns from 'date-fns'
 import { 
   VictoryChart, 
   VictoryPie,
@@ -9,6 +9,10 @@ import {
   VictoryLine, 
   VictoryTheme
 } from 'victory'
+
+function formatXAxis(start, timestamp) {
+  return dateFns.format(tickItem)
+}
 
 class Dial extends React.Component {
 
@@ -33,7 +37,6 @@ class Dial extends React.Component {
     const pieSettings = {
       startAngle: 90,
       endAngle: -180,
-      innerRadius: 140,
       animate: {duration: 200}
     }
 
@@ -55,15 +58,19 @@ class Dial extends React.Component {
           <VictoryPie
             standalone={false}
             width={400} height={400}
-            colorScale={[dialColor.setAlpha(.05).toRgbString(), color]}
+            colorScale={[dialColor.setAlpha(0.05).toRgbString(), color]}
             data={temperatureData}
+            radius={200}
+            innerRadius={190}
             {...pieSettings}
           />
           <VictoryPie
             standalone={false}
             width={400} height={400}
-            colorScale={[dialColor.setAlpha(0).toRgbString(), dialColor.setAlpha(.2).toRgbString()]}
+            colorScale={[dialColor.setAlpha(0.05).toRgbString(), dialColor.setAlpha(.5).toRgbString()]}
             data={setPointData}
+            radius={187}
+            innerRadius={180}
             {...pieSettings}
           />
           <VictoryLabel

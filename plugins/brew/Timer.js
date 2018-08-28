@@ -1,5 +1,5 @@
 import React from 'react'
-
+import dateFns from 'date-fns'
 export default class Timer extends React.PureComponent {
 
   state = {
@@ -10,18 +10,20 @@ export default class Timer extends React.PureComponent {
 
     setInterval(() => {
       this.setState({
-        time: new Date().getTime()
+        time: new Date()
       })
-    }, 500)
+    }, 1000)
   }
 
   render() {
     const {lastTime} = this.props
     const {time} = this.state
-    const timeAgo = (time - new Date(lastTime).getTime()) / 1000
+    if (!time || !lastTime) {
+      return <span />
+    }
     return (
       <div>
-          Live! Last update {timeAgo.toFixed(2)}s ago
+          Last update {dateFns.distanceInWords(lastTime, time)} ago
       </div>
     )
   }

@@ -173,7 +173,9 @@ export default class HeidrunMap extends React.Component {
           <circle id="7" cx="346.5" cy="254.5" r="6.5" fill={valvesStatus[6] === 0 ? closedColor : openColor} />
           <circle id="8" cx="390.5" cy="205.5" r="6.5" fill={valvesStatus[7] === 0 ? closedColor : openColor} />
 
-          <circle id="p1" cx="117" cy="225" r="6.5" fill={valvesStatus[12] === 0 ? closedColor : openColor}/>
+          <circle id="p1" cx="117" cy="225" r="6.5" fill={valvesStatus[8] === 0 ? closedColor : openColor}/>
+          <circle id="p2" cx="304" cy="225" r="6.5" fill={valvesStatus[9] === 0 ? closedColor : openColor}/>
+          <circle id="p2" cx="480" cy="225" r="6.5" fill={valvesStatus[10] === 0 ? closedColor : openColor}/>
 
           <polygon points="60,30 90,90 30,90">
             <animateTransform
