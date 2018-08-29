@@ -14,6 +14,7 @@ import Dial from './Dial'
 import HeidrunMap from '../HeidrunMap'
 import Timer from './Timer'
 import ReChart from './ReChart'
+import Command from './Command'
 import dateFns from 'date-fns'
 
 const convertToCelcius = data => {
@@ -105,6 +106,9 @@ const liveQuery = `
     }
   }[0]
 `
+const allLogsQuery = `
+  *[_type == "brewLog"] { _id, _createdAt, _updatedAt, title, }
+`
 
 const query = `
   *[_type == "brewLog"] | order(_createdAt desc) {
@@ -134,6 +138,7 @@ class BrewStatus extends React.Component {
     log: undefined,
     debugRunning: false,
     fullscreen: false,
+    showCommand: false,
     showActiveValveProfiles: false,
     zoomDomain: { 
       x: [new Date(1990, 1, 1), new Date(2009, 1, 1)] 
@@ -181,8 +186,17 @@ class BrewStatus extends React.Component {
   }
 
   handleActiveValveSwitch = event => {
-    console.log(event.target.checked)
-    console.log(event.target.value, (event.target.value * 32))
+    // b&1&1
+    //b & bitmask & on/off
+    const bitmask = Math.pow(2, event.target.value)
+    console.log(event.target.value, bitmask)
+    const status = event.target.checked ? 1 : 0
+    const command = `b&${bitmask}&${status}`
+    this.sendCommand(command)
+  }
+
+  stopAlarm = () => {
+    this.sendCommand('V&0')
   }
 
   sendCommand = command => {
@@ -202,7 +216,7 @@ class BrewStatus extends React.Component {
   }
 
   consoleLiveItem = () => {
-    console.log(last(this.state.liveItem) || 'Not live')
+    console.log(last(this.state.log) || 'Not live')
   }
 
   runDebug = () => {
@@ -224,6 +238,12 @@ class BrewStatus extends React.Component {
     this.setState({
       debugRunning: false,
       log: this.logBackup
+    })
+  }
+
+  toggleCommand = () => {
+    this.setState({
+      showCommand: !this.state.showCommand
     })
   }
   
@@ -261,7 +281,8 @@ class BrewStatus extends React.Component {
       showActiveValveProfiles,
       showPanel,
       debugRunning,
-      fullscreen
+      fullscreen,
+      showCommand
     } = this.state
 
     const liveItem = last(log) || {}
@@ -269,7 +290,7 @@ class BrewStatus extends React.Component {
     return (
       <div className={styles.container}>
         <div className={styles.topMenu}>
-          <Button onClick={this.sendCommand} color="primary" inverted>Command</Button>
+          <Button onClick={this.sendCommand} color="primary" inverted={!showCommand} onClick={this.toggleCommand}>Command</Button>
           <Button onClick={this.showActiveValveProfiles} color="primary" inverted>Valve profiles</Button>
           <Button onClick={this.togglePanel} color="primary" inverted={!showPanel}>Panel</Button>
           <Button onClick={this.consoleLog} color="primary" inverted>Console.log</Button>
@@ -286,10 +307,16 @@ class BrewStatus extends React.Component {
           {
             debugRunning && <Button onClick={this.stopDebug} color="danger">Stop debug</Button>
           }
-        </div>       
+          {
+            liveItem && (
+              <Button onClick={this.stopAlarm} color="danger" inverted={!liveItem.alarmStatus}>Stop alarm</Button>
+            )
+          }
+        </div>
         {
           liveItem && (
-            <div className={styles.live}>          
+            <div className={styles.live}>
+              {liveItem.alarmStatus == 1 && <div className={styles.alarm} />}
               <div>
                 <Timer lastTime={new Date(liveItem.timestamp)} />
               </div>
@@ -302,6 +329,11 @@ class BrewStatus extends React.Component {
                 }
               </div>
             </div>
+          )
+        }
+        {
+          showCommand && (
+            <Command onClose={this.toggleCommand} />
           )
         }
         {

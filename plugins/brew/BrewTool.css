@@ -1,40 +1,56 @@
 @import "part:@sanity/base/theme/variables-style";
 
+@keyframes alarm {
+  0% {
+    opacity: 0;
+  },
+
+  100% {
+    opacity: 0.6;
+  }
+}
+
 .container {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   width: 100%;
-  height: 100%;
-  
-  position: absolute;
   color: var(--brand-primary);
   background-color: rgb(43, 40, 29);
   padding: 1rem;
   box-sizing: border-box;
   font-weight: 100;
 
-  @nest & h1 {
-    font-weight: 100;
+  @media (--screen-medium) {
+    height: 100%;
+    position: absolute;
   }
 }
 
 .topMenu {
-  display: grid;
-  grid-auto-flow: column;
   font-size: 0.9rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1rem;
 
   @nest & span {
     display: block;
     text-align: center;
   }
+
+  @media (--screen-medium) {
+    grid-auto-flow: column;
+  }
 }
 
 .dials {
   width: 100%;
-  display: flex;
-  justify-content: space-evenly;
-  height: 100%;
+
+  @media (--screen-medium) {
+    display: flex;
+    justify-content: space-evenly;
+    height: 100%;
+  }
 }
 
 .dial {
@@ -69,7 +85,27 @@
 }
 
 .chart {
-  flex-basis: 50%;
+  height: 500px;
   position: relative;
-  margin-top: auto;
+  width: 100%;
+
+  @media (--screen-medium) {
+    height: unset;
+    width: unset;
+    flex-basis: 50%;    
+    margin-top: auto; 
+  }
+}
+
+.alarm {
+  position: fixed;
+  z-index: 100000;
+  background-color: var(--state-danger-color);
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  animation: alarm 0.1s linear infinite;
+  animation-direction: alternate;
+  pointer-events: none;
 }

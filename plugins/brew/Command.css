@@ -1,0 +1,14 @@
+.dialogContent {
+  composes: dialogContent from './BrewTool.css';
+  min-width: 20rem;
+}
+
+.console {
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff; 
+}
+
+.jsonInspector {
+  border: 2px solid red;
+}
