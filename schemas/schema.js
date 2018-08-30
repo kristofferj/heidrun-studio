@@ -12,6 +12,7 @@ import ingredient from './ingredient'
 import logItem from './logItem'
 import yeast from './yeast'
 import mash from './mash'
+import command from './command'
 import BJCPCategory from './BJCPCategory'
 import BJCPSubCategory from './BJCPSubCategory'
 
@@ -30,6 +31,7 @@ export default createSchema({
     mash,
     BJCPCategory,
     BJCPSubCategory,
-    logItem
+    logItem,
+    command
   ])
 })

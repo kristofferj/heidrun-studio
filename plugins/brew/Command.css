@@ -6,9 +6,6 @@
 .console {
   padding: 1rem;
   background: rgba(0, 0, 0, 0.8);
-  color: #fff; 
-}
-
-.jsonInspector {
-  border: 2px solid red;
+  color: #fff;
+  white-space: pre-wrap;
 }

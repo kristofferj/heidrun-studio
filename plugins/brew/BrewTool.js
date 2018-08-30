@@ -199,6 +199,10 @@ class BrewStatus extends React.Component {
     this.sendCommand('V&0')
   }
 
+  startAlarm = () => {
+    this.sendCommand('V&1')
+  }
+
   sendCommand = command => {
     fetch(`http://172.16.1.80:3000/api/btnic?${command || 'a'}`, result => {
       console.log(result)
@@ -308,8 +312,13 @@ class BrewStatus extends React.Component {
             debugRunning && <Button onClick={this.stopDebug} color="danger">Stop debug</Button>
           }
           {
-            liveItem && (
-              <Button onClick={this.stopAlarm} color="danger" inverted={!liveItem.alarmStatus}>Stop alarm</Button>
+            liveItem && liveItem.alarmStatus && (
+              <Button onClick={this.stopAlarm} color="danger">Stop alarm</Button>
+            )
+          }
+          {
+            liveItem && !liveItem.alarmStatus && (
+              <Button onClick={this.startAlarm} color="danger" inverted>Start alarm</Button>
             )
           }
         </div>
