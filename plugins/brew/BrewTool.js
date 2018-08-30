@@ -16,6 +16,7 @@ import Timer from './Timer'
 import ReChart from './ReChart'
 import Command from './Command'
 import dateFns from 'date-fns'
+import sendCommand from './sendCommand'
 
 const convertToCelcius = data => {
   return data !== 0 ? data / 100 : 0
@@ -192,21 +193,15 @@ class BrewStatus extends React.Component {
     console.log(event.target.value, bitmask)
     const status = event.target.checked ? 1 : 0
     const command = `b&${bitmask}&${status}`
-    this.sendCommand(command)
+    sendCommand(command)
   }
 
   stopAlarm = () => {
-    this.sendCommand('V&0')
+    sendCommand('V&0')
   }
 
   startAlarm = () => {
-    this.sendCommand('V&1')
-  }
-
-  sendCommand = command => {
-    fetch(`http://172.16.1.80:3000/api/btnic?${command || 'a'}`, result => {
-      console.log(result)
-    })
+    sendCommand('V&1')
   }
 
   togglePanel = () => {
@@ -294,7 +289,7 @@ class BrewStatus extends React.Component {
     return (
       <div className={styles.container}>
         <div className={styles.topMenu}>
-          <Button onClick={this.sendCommand} color="primary" inverted={!showCommand} onClick={this.toggleCommand}>Command</Button>
+          <Button onClick={this.toggleCommand} color="primary" inverted={!showCommand}>Command</Button>
           <Button onClick={this.showActiveValveProfiles} color="primary" inverted>Valve profiles</Button>
           <Button onClick={this.togglePanel} color="primary" inverted={!showPanel}>Panel</Button>
           <Button onClick={this.consoleLog} color="primary" inverted>Console.log</Button>
@@ -311,13 +306,14 @@ class BrewStatus extends React.Component {
           {
             debugRunning && <Button onClick={this.stopDebug} color="danger">Stop debug</Button>
           }
+
           {
-            liveItem && liveItem.alarmStatus && (
+            liveItem && liveItem.alarmStatus == 1 && (
               <Button onClick={this.stopAlarm} color="danger">Stop alarm</Button>
             )
           }
           {
-            liveItem && !liveItem.alarmStatus && (
+            liveItem && liveItem.alarmStatus == 0 && (
               <Button onClick={this.startAlarm} color="danger" inverted>Start alarm</Button>
             )
           }

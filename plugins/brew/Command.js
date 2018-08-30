@@ -9,6 +9,7 @@ import styles from './Command.css'
 import commands from './commands'
 // import renderjson from 'renderjson'
 import Inspector from 'react-json-inspector'
+import sendCommand from './sendCommand'
 
 export default class Command extends React.PureComponent {
 
@@ -35,48 +36,17 @@ export default class Command extends React.PureComponent {
   }
 
   sendCommand = command => {
-    fetch(`http://172.16.1.80:3000/api/btnic?${command || 'a'}`)
-      .then(response => {
-          if (response.status !== 200) {
-            console.log('Looks like there was a problem. Status Code: ' + response.status)
-            this.setState({result: `Error… ${response.status}`})
-            return
-          }
-          // Examine the text in the response
-          response.text().then(data => {
-            if (data.split('OK').length === 2) {
-              const json = JSON.parse(data.split('OK')[1])
-              console.log('json', json)
-              if (json.length > 1) {
-                this.setState({
-                  result: json
-                })
-              } else {
-                this.setState({
-                  result: 'Try again. Brewtroller responded with empty.'
-                })
-              }
-
-              if (json[0] === '#') {
-                this.setState({
-                  result: 'Invalid command'
-                })
-              }
-              
-            } else {
-              console.log('could not read data', data)
-              this.setState({
-                result: `could not read data: ${data}`
-              })
-            }
-            
-          });
-        }
-      )
-      .catch(err => {
-        this.setState({result: `Fetch error… ${err}`})
-        console.log('Fetch Error :-S', err);
-      })
+    sendCommand(command).then(res => {
+      if (res && res.result) {
+        this.setState({result: res.result})
+      } else if (res) {
+        this.setState({
+          result: res.error || 'Unknown error'
+        })
+      } else {
+        console.error('No error from sendCommand', res)
+      }
+    })
   }
 
   handleSend = () => {
@@ -94,7 +64,6 @@ export default class Command extends React.PureComponent {
     const {onClose} = this.props
 
     console.log('commandLine', commandLine)
-    console.log('guess command', )
 
     return (
       <Dialog isOpen onClose={onClose}>
