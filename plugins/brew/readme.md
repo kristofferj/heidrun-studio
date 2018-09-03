@@ -346,47 +346,47 @@ Response Parameters:
     262144: User 2
     524288: User 3
   3 Active Valve Outputs Bitmask
-  HLT Setpoint
-  HLT Temperature
-  HLT Heat Power
-  HLT Target Volume
-  HLT Volume
-  HLT Flowrate
-  Mash Setpoint
-  Mash Temperature
-  Mash Heat Power
-  Mash Target Volume
-  Mash Volume
-  Mash Flowrate
-  Kettle Setpoint
-  Kettle Temperature
-  Kettle Heat Power
-  Kettle Target Volume
-  Kettle Volume
-  Kettle Flowrate
-  Mash Timer Value
-  Mash Timer Status
-  Boil Timer Value
-  Boil Timer Status
+    HLT Setpoint
+    HLT Temperature
+    HLT Heat Power
+    HLT Target Volume
+    HLT Volume
+    HLT Flowrate
+    Mash Setpoint
+    Mash Temperature
+    Mash Heat Power
+    Mash Target Volume
+    Mash Volume
+    Mash Flowrate
+    Kettle Setpoint
+    Kettle Temperature
+    Kettle Heat Power
+    Kettle Target Volume
+    Kettle Volume
+    Kettle Flowrate
+    Mash Timer Value
+    Mash Timer Status
+    Boil Timer Value
+    Boil Timer Status
   Boil Control State
-  Kettle Off (0)
-  Auto Boil (1)
-  Manual Boil (2)
+    Kettle Off (0)
+    Auto Boil (1)
+    Manual Boil (2)
   Mash Zone Active Program Step
-  Fill (0)
-  Delay (1)
-  Preheat (2)
-  Grain In (3)
-  Refill (4)
-  Dough In (5)
-  Acid (6)
-  Protein (7)
-  Sacch (8)
-  Sacch2 (9)
-  Mash Out (10)
-  Mash Hold (11)
-  Sparge (12)
-  Idle (255)
+    Fill (0)
+    Delay (1)
+    Preheat (2)
+    Grain In (3)
+    Refill (4)
+    Dough In (5)
+    Acid (6)
+    Protein (7)
+    Sacch (8)
+    Sacch2 (9)
+    Mash Out (10)
+    Mash Hold (11)
+    Sparge (12)
+    Idle (255)
   Mash Zone Active Program Recipe (0-19, 255 = Idle)
   Boil Zone Active Program Step
   Boil (13)

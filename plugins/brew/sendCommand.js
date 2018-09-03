@@ -1,4 +1,4 @@
-function sendCommand(command, timeout, maxAttempts) {
+async function sendCommand(command, timeout, maxAttempts) {
   let attempts = 0
   if (attempts > maxAttempts) {
     return {error: `Got no response after ${attempts} attempts`}
@@ -16,8 +16,6 @@ function sendCommand(command, timeout, maxAttempts) {
           const json = JSON.parse(data.split('OK')[1])
   
           if (json.length > 1) {
-            console.log('got result', json)
-
             if (json[0] === '#') {
               return {
                 error: 'Invalid command params. Check documentation'
@@ -27,10 +25,10 @@ function sendCommand(command, timeout, maxAttempts) {
             return {result: json}
           } else {
             // Retry
-            console.log('try again')
-            setTimeout(async () => {
-              return await sendCommand(command, timeout, maxAttempts)
-            }, timeout)          
+            console.log('Drunk Brewtroller busy. Retry…')
+            return new Promise(resolve => setTimeout(async () => {
+              return resolve(sendCommand(command, timeout, maxAttempts))
+            }, timeout))
           }
 
           return {
@@ -51,8 +49,8 @@ function sendCommand(command, timeout, maxAttempts) {
   })
 }
 
-export default async function(command, timout = 1000, maxAttempts = 10) {
-  return await sendCommand(command, timout, maxAttempts)  
+export default function(command, timout = 1000, maxAttempts = 10) {
+  return sendCommand(command, timout, maxAttempts)  
 }
 
 
