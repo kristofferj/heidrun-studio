@@ -18,6 +18,49 @@ export default {
       to: [{
         type: 'BJCP-Category'
       }]
+    },
+    {
+      name: 'appearance', type: 'text', rows: 2
+    },
+    {
+      name: 'aroma', type: 'text', rows: 2
+    },
+    {
+      name: 'comments', type: 'text', rows: 2
+    },
+    {
+      name: 'comparison', type: 'text', rows: 2
+    },
+    {
+      name: 'entry_instructions', type: 'text', rows: 2
+    },
+    {
+      name: 'examples', type: 'text', rows: 2
+    },
+    {
+      name: 'flavor', type: 'text', rows: 2
+    },
+    {
+      name: 'history', type: 'text', rows: 2
+    },
+    {
+      name: 'id', type: 'string'
+    },
+    {
+      name: 'impression', type: 'text', rows: 2
+    },
+    {
+      name: 'ingredients', type: 'text', rows: 2
+    },
+    {
+      name: 'mouthfeel', type: 'text', rows: 2
+    },
+    {
+      name: 'tags', type: 'text', rows: 2
+    },
+    {
+      name: 'stats',
+      type: 'stats'
     }
   ],
   preview: {
