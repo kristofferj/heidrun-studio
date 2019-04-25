@@ -22,6 +22,10 @@ const convertToCelcius = data => {
   return data !== 0 ? data / 100 : 0
 }
 
+const convertToLiters = data => {
+  return data !== 0 ? data / 1000 : 0
+}
+
 function convertLog(log) {
   return log.map(l => {
     return {
@@ -29,6 +33,7 @@ function convertLog(log) {
       profileStatus: l.profileStatus,
       HLT_Setpoint: convertToCelcius(l.HLT_Setpoint),
       HLT_Temperature: convertToCelcius(l.HLT_Temperature),
+      HLT_Volume: convertToLiters(l.HLT_Volume),
       Mash_Setpoint: convertToCelcius(l.Mash_Setpoint),
       Mash_Temperature: convertToCelcius(l.Mash_Temperature),
       Kettle_Setpoint: convertToCelcius(l.Kettle_Setpoint),
@@ -96,6 +101,7 @@ const liveQuery = `
         HLT_HeatPower,
         HLT_Setpoint,
         HLT_Temperature,
+        HLT_Volume,
         Kettle_HeatPower,
         Kettle_Setpoint,
         Kettle_Temperature,
@@ -121,6 +127,7 @@ const query = `
         HLT_HeatPower,
         HLT_Setpoint,
         HLT_Temperature,
+        HLT_Volume,
         Kettle_HeatPower,
         Kettle_Setpoint,
         Kettle_Temperature,
@@ -382,6 +389,7 @@ class BrewStatus extends React.Component {
                   temperature={liveItem.HLT_Temperature > 0 ? liveItem.HLT_Temperature / 100 : 0}
                   setpoint={liveItem.HLT_Setpoint > 0 ? liveItem.HLT_Setpoint / 100 : 0}
                   power={liveItem.HLT_HeatPower}
+                  volume={convertToLiters(liveItem.HLT_Volume)}
                   color={colors['HLT']}
                 />
                 <Dial

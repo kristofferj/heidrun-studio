@@ -31,6 +31,7 @@ const activeValveProfileStatusDescriptor = [
 
 import {
   ReferenceArea,
+  Area,
   Label,
   ComposedChart,
   Line,
@@ -149,6 +150,7 @@ export default class HeidrunChart extends React.PureComponent {
   
   renderTooltip = props => {
     const {label, payload} = props
+    console.log(payload)
     return (
       <div className={styles.tooltip}>
         <div className={styles.legend}>
@@ -168,7 +170,7 @@ export default class HeidrunChart extends React.PureComponent {
           payload[0] && payload[3] && (
             <div style={{color: '#fff', marginTop: '1em'}} className={styles.tooltipLine}>
               <div>HLT/MASH diff</div>
-              <div>{Number(payload[3].value - payload[1].value).toFixed(1)}℃</div>
+              <div>{Number(payload[0].value - payload[4].value).toFixed(1)}℃</div>
             </div>
           )
         }
@@ -233,6 +235,20 @@ export default class HeidrunChart extends React.PureComponent {
               isAnimationActive={false}
               animationEasing="linear"
             />
+            <Area name="HLT Volume"
+              dataKey='HLT_Volume'
+              dot={false}
+              type='monotone'
+              yAxisId="1"
+              connectNulls={true}
+              stroke={colors['HLT']}
+              stroke={colors['HLT']}
+              opacity={0.1}
+              animationDuration={100}
+              isAnimationActive={false}
+              animationEasing="linear"
+            />
+
             <Line name='HLT Setpoint'
               dataKey='HLT_Setpoint'
               stroke={colors['HLT']}

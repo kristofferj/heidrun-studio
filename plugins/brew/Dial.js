@@ -29,6 +29,7 @@ class Dial extends React.Component {
       title,
       temperature,
       setpoint,
+      volume,
       className,
       color = '#ffffff',
       power = 0
@@ -96,6 +97,12 @@ class Dial extends React.Component {
             style={{ fontSize: 20, fill: "white" }}
             x={200} y={290}
             text={`${power || 0}% power`}
+          />
+          <VictoryLabel
+            textAnchor="middle"
+            style={{ fontSize: 20, fill: "white" }}
+            x={200} y={330}
+            text={`${volume || 0} Liters`}
           />
         </svg>
       </Fragment>
