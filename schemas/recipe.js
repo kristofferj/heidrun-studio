@@ -17,6 +17,11 @@ export default {
       type: 'string'
     },
     {
+      name: 'style',
+      type: 'reference',
+      to: [{type: 'BJCP-Sub-Category'}]
+    },
+    {
       name: 'notes',
       title: 'Notes',
       type: 'blockContent'

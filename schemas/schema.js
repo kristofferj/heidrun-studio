@@ -15,10 +15,12 @@ import mash from './mash'
 import command from './command'
 import BJCPCategory from './BJCPCategory'
 import BJCPSubCategory from './BJCPSubCategory'
+import stats from './stats'
 
 export default createSchema({
   name: 'default',
   types: schemaTypes.concat([
+    stats,
     brew,
     brewLog,
     recipe,
